@@ -25,11 +25,17 @@ jobs:
           role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
           aws-region: ${{secrets.AWS_REGION}}
       - name: Sync to S3
+        id: sync_s3
         run:  |
-          aws s3 sync . s3://${{ secrets.BUCKET_NAME }} \
+          echo "$(aws s3 sync . s3://${{ secrets.BUCKET_NAME }} \
             --size-only \
             --delete \
-            --exclude ".git/*" \
-            --exclude ".github/*" \
-            --exclude "README.md" \
-            --exclude ".gitignore"
+            --exclude '.git/*' \
+            --exclude '.github/*' \
+            --exclude 'README.md' \
+            --exclude '.gitignore')\n" >> $GITHUB_OUTPUT
+      - name: Invalidate CloudFront distribution
+        run:  |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{secrets.DISTRIBUTION_ID}} \
+            --paths
