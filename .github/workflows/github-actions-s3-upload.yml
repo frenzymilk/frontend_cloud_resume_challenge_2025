@@ -1,0 +1,33 @@
+name: Deploy Cloud Resume Challenge Website to S3
+run-name: ${{ github.actor }} is deploying changes made to CRC Website 🚀
+on:
+  push:
+    branches:
+      - main
+jobs:
+  sync-to-s3:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # required for actions/checkout
+      id-token: write # required for requesting the JWT
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{secrets.AWS_ROLE_TO_ASSUME}}
+          aws-region: ${{secrets.AWS_REGION}}
+          role-session-name: ${{secrets.AWS_SESSION_NAME}}
+      - name: Sync to S3
+        run:  |
+          aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "README.md" \
+            --exclude ".gitignore"
