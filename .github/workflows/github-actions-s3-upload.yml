@@ -27,6 +27,7 @@ jobs:
       - name: Sync to S3
         run:  |
           aws s3 sync . s3://${{ secrets.BUCKET_NAME }} \
+            --size-only \
             --delete \
             --exclude ".git/*" \
             --exclude ".github/*" \
