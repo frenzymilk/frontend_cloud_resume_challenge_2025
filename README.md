@@ -1,2 +1,3 @@
 # frontend_cloud_resume_challenge_2025
-My iteration of the Cloud Resume Challenge from Forrest Brazeal. -
+You are currently on the Frontend repo of my iteration of the Cloud Resume Challenge from Forrest Brazeal, a fully serverless, automated resume website using AWS.
+Go here for the [Backend](https://github.com/frenzymilk/backend_cloud_resume_challenge_2025).
