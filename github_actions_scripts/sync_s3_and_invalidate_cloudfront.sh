@@ -26,3 +26,4 @@ if [ -n "$INVALIDATION_PATHS" ]; then
 else
   echo "No files uploaded — skipping CloudFront invalidation."
 fi
+
