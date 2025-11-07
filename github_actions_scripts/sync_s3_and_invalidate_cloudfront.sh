@@ -6,7 +6,7 @@ SYNC_OUTPUT=$(aws s3 sync . "s3://$BUCKET_NAME" --delete --size-only --exclude "
 echo $SYNC_OUTPUT
 # --- EXTRACT FILES UPLOADED ---
 # Pull only the file paths from "upload:" lines
-FILES=$(echo "$SYNC_OUTPUT" | grep "upload:" | awk '{print $2}')
+FILES=$(echo "$SYNC_OUTPUT" | grep -oP 'upload:\s+\K(.\S+)')
 echo $FILES
 # --- BUILD INVALIDATION PATHS ---
 # CloudFront paths must start with "/"
