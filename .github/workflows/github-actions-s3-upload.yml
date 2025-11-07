@@ -8,7 +8,7 @@ on:
       - main
     paths-ignore:
       - ".github/**"
-      - "./github_actions_scripts/*"
+      - "github_actions_scripts/*"
       - ".git/*"
 
 env:
