@@ -8,6 +8,8 @@ on:
       - main
     paths-ignore:
       - ".github/**"
+      - "./github_actions_scripts/*"
+      - ".git/*"
 
 env:
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }} 
