@@ -9,10 +9,9 @@ echo $SYNC_OUTPUT
 FILES=$(echo "$SYNC_OUTPUT" | grep -oP 'upload:\s+\K(.\S+)')
 echo $FILES
 # --- BUILD INVALIDATION PATHS ---
-# CloudFront paths must start with "/"
 INVALIDATION_PATHS=""
 for FILE in $FILES; do
-  INVALIDATION_PATHS="$INVALIDATION_PATHS /$FILE"
+  INVALIDATION_PATHS="$INVALIDATION_PATHS '$FILE'"
 done
 echo $INVALIDATION_PATHS
 # --- CREATE INVALIDATION ---
