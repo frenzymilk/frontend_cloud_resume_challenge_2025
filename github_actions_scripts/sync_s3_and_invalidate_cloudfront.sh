@@ -19,9 +19,9 @@ if [ -n "$INVALIDATION_PATHS" ]; then
   echo "Creating CloudFront invalidation for:"
   echo $INVALIDATION_PATHS
 
-  #aws cloudfront create-invalidation \
-  #  --distribution-id "$DISTRIBUTION_ID" \
-  #  --paths $INVALIDATION_PATHS
+  aws cloudfront create-invalidation \
+    --distribution-id "$DISTRIBUTION_ID" \
+    --paths $INVALIDATION_PATHS
 else
   echo "No files uploaded — skipping CloudFront invalidation."
 fi
