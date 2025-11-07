@@ -33,6 +33,9 @@ jobs:
         with:
           role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
           aws-region: ${{secrets.AWS_REGION}}
+      - name: Set script permissions
+        run:  |
+          chmod u+x ./github_actions_scripts/sync_s3_and_invalidate_cloudfront.sh
       - name: Sync to S3 and invalidate Cloudfront distribution
         run:  | 
           ./github_actions_scripts/sync_s3_and_invalidate_cloudfront.sh
