@@ -23,3 +23,16 @@ Here’s what I delivered:
 - Fine-grained IAM policies for least-privilege access
 - Clear separation between users, roles, and service permissions
 - HTTPS enforced and no public backend access
+
+## Deployment
+Any change in the frontend files will trigger an automated deployment to update the S3 bucket on AWS and invalidate the corresponding files on the Cloudfront distribution
+
+### Secrets configuration
+The following secrets in the Github project settings for the Github Actions workflow should be provided:
+- `AWS_REGION`
+- `BUCKET_NAME`
+- `DISTRIBUTION_ID`
+- `ROLE_TO_ASSUME`
+
+### Deployment Scripts
+Scripts run by Github Actions upon deployment
